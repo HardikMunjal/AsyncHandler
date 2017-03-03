@@ -10,7 +10,12 @@ module.exports = function (app) {
 
 var shivu = require('./shivu');
 
-app.get('/', shivu.callbackPatternStyle);
+
+//If we use more than 1 async function parallely then they will not wait for each other completion, so 
+// we can not use return of 1 async function into another
+app.get('/async/default', shivu.parallelAsyncFunction);
+app.get('/async/nested', shivu.nestedAsyncFunction);
+app.get('/callback/pattern', shivu.callbackStylePattern);
 
 
 
